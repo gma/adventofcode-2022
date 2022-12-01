@@ -1,4 +1,4 @@
-def sum_calories(data):
+def totals(data):
     totals = []
     lines = data.strip()
     if lines:
@@ -8,12 +8,12 @@ def sum_calories(data):
     return totals
 
 
-def greatest_calories(data, *, num):
-    totals = sum_calories(data)
-    totals.sort()
-    return list(reversed(totals))[:num]
+def largest_totals(data, *, num):
+    calories = totals(data)
+    calories.sort()
+    return list(reversed(calories))[:num]
 
 
 if __name__ == "__main__":
-    print(max(sum_calories(open('input').read())))
-    print(sum(greatest_calories(open('input').read(), num=3)))
+    print(max(totals(open('input').read())))
+    print(sum(largest_totals(open('input').read(), num=3)))
