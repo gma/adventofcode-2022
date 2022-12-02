@@ -10,14 +10,14 @@ class TestPart1:
     def test_calculate_score_for_drawn_round(self):
         draw_score = 3
 
-        assert rps.score_for_round("A", "X") == rock_score + draw_score
-        assert rps.score_for_round("C", "Z") == scissors_score + draw_score
+        assert rps.score_for_round("A", "A") == rock_score + draw_score
+        assert rps.score_for_round("C", "C") == scissors_score + draw_score
 
 
     def test_calculate_score_for_win(self):
         win_score = 6
 
-        assert rps.score_for_round("A", "Y") == paper_score + win_score
+        assert rps.score_for_round("A", "B") == paper_score + win_score
 
 
 class TestPart2:

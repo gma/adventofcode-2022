@@ -5,13 +5,10 @@ char_shapes = {
     "A": "rock",
     "B": "paper",
     "C": "scissors",
-    "X": "rock",
-    "Y": "paper",
-    "Z": "scissors",
 }
 
 
-shape_chars = {"rock": "A", "paper": "B", "scissors": "C"}
+shape_chars = {shape: char for char, shape in char_shapes.items()}
 
 
 shape_scores = {"rock": 1, "paper": 2, "scissors": 3}
@@ -60,13 +57,27 @@ strategies = {
 }
 
 
-if __name__ == "__main__":
-    rounds = open("input").readlines()
-    print(sum(score_for_round(*game.split()) for game in rounds))
+strategies_as_move = {"X": "A", "Y": "B", "Z": "C"}
 
+
+def part1(rounds):
+    total = 0
+    for game in rounds:
+        opponent_char, player_char = game.split()
+        total += score_for_round(opponent_char, strategies_as_move[player_char])
+    print(total)
+
+
+def part2(rounds):
     total = 0
     for game in rounds:
         opponent_char, strategy = game.split()
         player_char = strategies[strategy](opponent_char)
         total += score_for_round(opponent_char, player_char)
     print(total)
+
+
+if __name__ == "__main__":
+    rounds = open("input").readlines()
+    part1(rounds)
+    part2(rounds)
