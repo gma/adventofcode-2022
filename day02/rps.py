@@ -1,3 +1,6 @@
+import collections
+
+
 moves = {
     "A": "rock",
     "B": "paper",
@@ -11,10 +14,11 @@ moves = {
 shape_scores = {"rock": 1, "paper": 2, "scissors": 3}
 
 
+Win = collections.namedtuple("Win", "opponent player")
 winning_games = (
-    ("rock", "paper"),
-    ("paper", "scissors"),
-    ("scissors", "rock"),
+    Win("rock", "paper"),
+    Win("paper", "scissors"),
+    Win("scissors", "rock"),
 )
 
 
