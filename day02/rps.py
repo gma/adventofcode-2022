@@ -25,3 +25,8 @@ def score_for_round(opponent, player):
     elif (moves[opponent], moves[player]) in winning_games:
         score += 6
     return score
+
+
+if __name__ == "__main__":
+    rounds = open("input").readlines()
+    print(sum(score_for_round(*game.split()) for game in rounds))
