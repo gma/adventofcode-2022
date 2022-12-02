@@ -1,7 +1,7 @@
 import collections
 
 
-moves = {
+char_shapes = {
     "A": "rock",
     "B": "paper",
     "C": "scissors",
@@ -22,11 +22,14 @@ winning_games = (
 )
 
 
-def score_for_round(opponent, player):
-    score = shape_scores[moves[player]]
-    if moves[opponent] == moves[player]:
+def score_for_round(opponent_char, player_char):
+    opponent_shape = char_shapes[opponent_char]
+    player_shape = char_shapes[player_char]
+
+    score = shape_scores[player_shape]
+    if opponent_shape == player_shape:
         score += 3
-    elif (moves[opponent], moves[player]) in winning_games:
+    elif (opponent_shape, player_shape) in winning_games:
         score += 6
     return score
 
