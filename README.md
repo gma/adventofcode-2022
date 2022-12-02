@@ -7,6 +7,7 @@ There are two problems to solve each day, from 1 December up to (and including) 
 ## The exercises
 
 - [Day 1: Calory Counting](./day01)
+- [Day 2: Rock Paper Scissors](./day02)
 
 [2022's Advent of Code]: https://adventofcode.com/2022
 [TDD]: https://www.agilealliance.org/glossary/tdd/
