@@ -1,3 +1,5 @@
+import io
+
 import rucksack
 
 
@@ -13,3 +15,14 @@ class TestPart1:
 
     def test_compartment_contents_returns_contents_of_both_compartments(self):
         assert rucksack.compartment_contents("abcd") == ("ab", "cd")
+
+
+class TestPart2:
+    def test_group_iterates_over_lines_three_lines_at_a_time(self):
+        groups = rucksack.groups(io.StringIO("1\n2\n3\n4\n5\n6\n"))
+
+        assert next(groups) == ("1", "2", "3")
+        assert next(groups) == ("4", "5", "6")
+
+    def test_common_item_supports_multiple_sets(self):
+        assert rucksack.common_item("abc", "cde", "cfg") == "c"
