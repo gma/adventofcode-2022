@@ -16,5 +16,18 @@ def part1(file):
     return count
 
 
+def overlap(a, b):
+    overlapping_range = range(max(a[0], b[0]), min(a[1], b[1]) + 1)
+    return bool(overlapping_range)
+
+
+def part2(file):
+    return [
+        overlap(*[sections_as_tuple(sections) for sections in line.split(",")])
+        for line in file
+    ].count(True)
+
+
 if __name__ == "__main__":
     print(part1(open("input")))
+    print(part2(open("input")))
