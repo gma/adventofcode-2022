@@ -20,22 +20,21 @@ def compartment_contents(items):
     return (compartment1, compartment2)
 
 
+def part1(file):
+    return sum(
+        item_priority(common_item(*compartment_contents(bag))) for bag in file
+    )
+
+
 def groups(file):
     for group in itertools.zip_longest(file, file, file):
         yield tuple(line.strip() for line in group)
 
 
-if __name__ == "__main__":
-    print(
-        sum(
-            item_priority(common_item(*compartment_contents(bag)))
-            for bag in open("input")
-        )
-    )
+def part2(file):
+    return sum(item_priority(common_item(*group)) for group in groups(file))
 
-    print(
-        sum(
-            item_priority(common_item(*group))
-            for group in groups(open("input"))
-        )
-    )
+
+if __name__ == "__main__":
+    print(part1(open("input")))
+    print(part2(open("input")))

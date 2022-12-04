@@ -16,6 +16,18 @@ class TestPart1:
     def test_compartment_contents_returns_contents_of_both_compartments(self):
         assert rucksack.compartment_contents("abcd") == ("ab", "cd")
 
+    def test_part1_solution(self):
+        test_data = """
+vJrwpWtwJgWrhcsFMMfFFhFp
+jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
+PmmdzqPrVvPwwTWBwg
+wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
+ttgJtRGJQctTZtZT
+CrZsJsPPZsGzwwsLwLmpwMDw
+        """.strip()
+
+        assert rucksack.part1(io.StringIO(test_data)) == 157
+
 
 class TestPart2:
     def test_group_iterates_over_lines_three_lines_at_a_time(self):
@@ -26,3 +38,15 @@ class TestPart2:
 
     def test_common_item_supports_multiple_sets(self):
         assert rucksack.common_item("abc", "cde", "cfg") == "c"
+
+    def test_part2_solution(self):
+        test_data = """
+vJrwpWtwJgWrhcsFMMfFFhFp
+jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
+PmmdzqPrVvPwwTWBwg
+wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
+ttgJtRGJQctTZtZT
+CrZsJsPPZsGzwwsLwLmpwMDw
+        """.strip()
+
+        assert rucksack.part2(io.StringIO(test_data)) == 70
