@@ -25,6 +25,7 @@ To run one of the solutions, change to the relevant directory and then run the c
 - [Day 1: Calory Counting](./day01)
 - [Day 2: Rock Paper Scissors](./day02)
 - [Day 3: Rucksack Reorganization](./day03)
+- [Day 4: Camp Cleanup](./day04)
 
 [2022's Advent of Code]: https://adventofcode.com/2022
 [TDD]: https://www.agilealliance.org/glossary/tdd/
