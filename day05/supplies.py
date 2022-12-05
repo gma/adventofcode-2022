@@ -37,3 +37,11 @@ def move_crates(stacks, file):
             crate = stacks[source - 1].pop()
             stacks[destination - 1].append(crate)
     return stacks
+
+
+def part1(file):
+    return "".join(stack[-1] for stack in move_crates(load_stacks(file), file))
+
+
+if __name__ == "__main__":
+    print(part1(open("input")))

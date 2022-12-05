@@ -80,3 +80,7 @@ class TestMoveCrates:
         stacks = supplies.move_crates(stacks, file)
 
         assert stacks == [["C"], ["M"], ["P", "D", "N", "Z"]]
+
+
+def test_part1_solution():
+    assert supplies.part1(io.StringIO(test_data)) == "CMZ"
