@@ -24,3 +24,16 @@ def load_stacks(file):
             if crate is not None:
                 stacks[i].append(crate)
     return stacks
+
+
+def read_move(file):
+    for line in file:
+        yield [int(n) for n in line.split()[1::2]]
+
+
+def move_crates(stacks, file):
+    for to_move, source, destination in read_move(file):
+        for _ in range(to_move):
+            crate = stacks[source - 1].pop()
+            stacks[destination - 1].append(crate)
+    return stacks

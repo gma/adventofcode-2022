@@ -45,3 +45,38 @@ class TestLoadStacks:
         assert stack1 == ["Z", "N"]
         assert stack2 == ["M", "C", "D"]
         assert stack3 == ["P"]
+
+
+class TestMoveCrates:
+    def test_read_move_yields_values_from_single_move(self):
+        file = io.StringIO("move 1 from 1 to 2\nmove 1 from 2 to 1\n")
+
+        to_move, source, destination = next(supplies.read_move(file))
+
+        assert to_move == 1
+        assert source == 1
+        assert destination == 2
+
+    def test_move_crates_can_move_single_crate(self):
+        stacks = [["A"], []]
+        file = io.StringIO("move 1 from 1 to 2\n")
+
+        stacks = supplies.move_crates(stacks, file)
+
+        assert stacks == [[], ["A"]]
+
+    def test_move_crates_can_move_multiple_crates_at_once(self):
+        stacks = [["A", "B"], []]
+        file = io.StringIO("move 2 from 1 to 2\n")
+
+        stacks = supplies.move_crates(stacks, file)
+
+        assert stacks == [[], ["B", "A"]]
+
+    def test_move_crates_follows_all_instructions(self):
+        file = io.StringIO(test_data)
+        stacks = supplies.load_stacks(file)
+
+        stacks = supplies.move_crates(stacks, file)
+
+        assert stacks == [["C"], ["M"], ["P", "D", "N", "Z"]]
