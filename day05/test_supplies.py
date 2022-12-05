@@ -84,3 +84,7 @@ class TestMoveCrates:
 
 def test_part1_solution():
     assert supplies.part1(io.StringIO(test_data)) == "CMZ"
+
+
+def test_part2_solution():
+    assert supplies.part2(io.StringIO(test_data)) == "MCD"

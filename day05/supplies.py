@@ -36,16 +36,27 @@ def remove_crates_9000(stack, count):
         yield stack.pop()
 
 
-def move_crates(stacks, file, move_strategy=remove_crates_9000):
+def remove_crates_9001(stack, count):
+    return reversed(list(remove_crates_9000(stack, count)))
+
+
+def move_crates(stacks, file, strategy=remove_crates_9000):
     for to_move, source, destination in read_move(file):
-        for crate in move_strategy(stacks[source - 1], to_move):
+        for crate in strategy(stacks[source - 1], to_move):
             stacks[destination - 1].append(crate)
     return stacks
 
 
 def part1(file):
-    return "".join(stack[-1] for stack in move_crates(load_stacks(file), file))
+    stacks = move_crates(load_stacks(file), file, strategy=remove_crates_9000)
+    return "".join(stack[-1] for stack in stacks)
+
+
+def part2(file):
+    stacks = move_crates(load_stacks(file), file, strategy=remove_crates_9001)
+    return "".join(stack[-1] for stack in stacks)
 
 
 if __name__ == "__main__":
     print(part1(open("input")))
+    print(part2(open("input")))
