@@ -31,10 +31,14 @@ def read_move(file):
         yield [int(n) for n in line.split()[1::2]]
 
 
-def move_crates(stacks, file):
+def remove_crates_9000(stack, count):
+    for _ in range(count):
+        yield stack.pop()
+
+
+def move_crates(stacks, file, move_strategy=remove_crates_9000):
     for to_move, source, destination in read_move(file):
-        for _ in range(to_move):
-            crate = stacks[source - 1].pop()
+        for crate in move_strategy(stacks[source - 1], to_move):
             stacks[destination - 1].append(crate)
     return stacks
 
