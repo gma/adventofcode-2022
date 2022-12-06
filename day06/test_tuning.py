@@ -1,12 +1,12 @@
 import tuning
 
 
-class TestFirstMarker:
-    def test_marker_position_returns_4_when_all_leading_characters_differ(self):
-        assert tuning.marker_position("abcd") == 4
+class TestPacketMarker:
+    def test_find_packet_returns_4_when_packet_starts_immediately(self):
+        assert tuning.find_packet("abcd") == 4
 
-    def test_marker_position_with_part1_sample_data(self):
-        assert tuning.marker_position("bvwbjplbgvbhsrlpgdmjqwftvncz") == 5
-        assert tuning.marker_position("nppdvjthqldpwncqszvftbrmjlhg") == 6
-        assert tuning.marker_position("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg") == 10
-        assert tuning.marker_position("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw") == 11
+    def test_find_packet_with_part1_sample_data(self):
+        assert tuning.find_packet("bvwbjplbgvbhsrlpgdmjqwftvncz") == 5
+        assert tuning.find_packet("nppdvjthqldpwncqszvftbrmjlhg") == 6
+        assert tuning.find_packet("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg") == 10
+        assert tuning.find_packet("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw") == 11

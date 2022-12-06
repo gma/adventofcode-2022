@@ -1,20 +1,21 @@
 import collections
 
 
-marker_width = 4
+def is_marker(marker, width):
+    return len(set(marker)) == width
 
 
-def is_marker(marker):
-    return len(set(marker)) == marker_width
-
-
-def marker_position(data):
-    potential_marker = collections.deque([], marker_width)
+def find_marker(data, *, width):
+    potential_marker = collections.deque(maxlen=width)
     for i, char in enumerate(data):
         potential_marker.append(char)
-        if is_marker(potential_marker):
+        if is_marker(potential_marker, width):
             return i + 1
 
 
+def find_packet(data):
+    return find_marker(data, width=4)
+
+
 if __name__ == "__main__":
-    print(marker_position(open("input").read()))
+    print(find_packet(open("input").read()))
