@@ -1,10 +1,19 @@
+import collections
+
+
+marker_width = 4
+
+
+def is_marker(marker):
+    return len(set(marker)) == marker_width
+
+
 def marker_position(data):
-    marker_width = 4
-    for i in range(marker_width - 1, len(data) + 1):
-        potential_marker = data[max(0, i - marker_width) : i]
-        if len(set(potential_marker)) == marker_width:
-            return i
-    return None
+    potential_marker = collections.deque([], marker_width)
+    for i, char in enumerate(data):
+        potential_marker.append(char)
+        if is_marker(potential_marker):
+            return i + 1
 
 
 if __name__ == "__main__":
