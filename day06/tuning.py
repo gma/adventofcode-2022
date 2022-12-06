@@ -1,15 +1,15 @@
 import collections
 
 
-def is_marker(marker, width):
-    return len(set(marker)) == width
+def is_marker(marker):
+    return len(set(marker)) == marker.maxlen
 
 
 def find_marker(data, *, width):
     potential_marker = collections.deque(maxlen=width)
     for i, char in enumerate(data):
         potential_marker.append(char)
-        if is_marker(potential_marker, width):
+        if is_marker(potential_marker):
             return i + 1
 
 
