@@ -27,6 +27,7 @@ To run one of the solutions, change to the relevant directory and then run the c
 - [Day 3: Rucksack Reorganization](./day03)
 - [Day 4: Camp Cleanup](./day04)
 - [Day 5: Supply Stacks](./day05)
+- [Day 6: Tuning Trouble](./day06)
 
 [2022's Advent of Code]: https://adventofcode.com/2022
 [TDD]: https://www.agilealliance.org/glossary/tdd/
