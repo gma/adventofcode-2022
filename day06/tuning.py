@@ -17,5 +17,10 @@ def find_packet(data):
     return find_marker(data, width=4)
 
 
+def find_message(data):
+    return find_marker(data, width=14)
+
+
 if __name__ == "__main__":
     print(find_packet(open("input").read()))
+    print(find_message(open("input").read()))
