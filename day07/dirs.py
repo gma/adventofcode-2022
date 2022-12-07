@@ -65,5 +65,16 @@ def part1(file):
     return sum(d.size for d in tree.directories if d.size <= 100000)
 
 
+def part2(file):
+    tree = Tree.from_log(file)
+    space_used = tree["/"].size
+    space_required = 30_000_000 - (70_000_000 - space_used)
+
+    candidates = [d for d in tree.directories if d.size >= space_required]
+    candidates.sort(key=lambda d: d.size)
+    return candidates[0].size
+
+
 if __name__ == "__main__":
     print(part1(open("input")))
+    print(part2(open("input")))

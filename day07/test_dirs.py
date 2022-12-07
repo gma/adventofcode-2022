@@ -101,3 +101,9 @@ def test_part1_solution():
     expected = size_of_e + size_of_a
 
     assert dirs.part1(io.StringIO(test_data)) == expected
+
+
+def test_part2_solution():
+    size_of_d = 24933642
+
+    assert dirs.part2(io.StringIO(test_data)) == size_of_d
