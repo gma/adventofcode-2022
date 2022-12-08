@@ -2,67 +2,61 @@ def load_grid(file):
     return [[int(height) for height in line.strip()] for line in file]
 
 
-def visible_from_start(i, sequence):
-    return all(sequence[i] > height for height in sequence[:i])
+def apply_til_start(f, i, sequence):
+    return f(sequence[i], reversed(sequence[:i]))
 
 
-def visible_from_end(i, sequence):
-    return all(sequence[i] > height for height in sequence[i + 1 :])
+def apply_til_end(f, i, sequence):
+    return f(sequence[i], sequence[i + 1 :])
 
 
-def visible_trees(grid):
-    visible = []
+def trees_in_plantation(grid):
     for y, row in enumerate(grid):
         for x in range(len(row)):
             col = [r[x] for r in grid]
-            if (
-                visible_from_start(x, row)
-                or visible_from_end(x, row)
-                or visible_from_start(y, col)
-                or visible_from_end(y, col)
-            ):
-                visible.append((x, y))
-    return visible
+            yield x, y, row, col
+
+
+def visible_from_outside(tree_height, trees):
+    return all(tree_height > height for height in trees)
+
+
+def visible_trees(grid):
+    for x, y, row, col in trees_in_plantation(grid):
+        if (
+            apply_til_start(visible_from_outside, x, row)
+            or apply_til_end(visible_from_outside, x, row)
+            or apply_til_start(visible_from_outside, y, col)
+            or apply_til_end(visible_from_outside, y, col)
+        ):
+            yield (x, y)
 
 
 def part1(file):
-    return len(visible_trees(load_grid(file)))
+    return len(list(visible_trees(load_grid(file))))
 
 
-def score_to_start(i, sequence):
+def viewing_distance(tree_height, trees):
     score = 0
-    for height in reversed(sequence[:i]):
+    for height in trees:
         score += 1
-        if height >= sequence[i]:
+        if height >= tree_height:
             break
     return score
 
 
-def score_to_end(i, sequence):
-    score = 0
-    for height in sequence[i + 1 :]:
-        score += 1
-        if height >= sequence[i]:
-            break
-    return score
-
-
-def scenic_score(x, y, grid):
-    col = [row[x] for row in grid]
+def scenic_score(x, y, row, col):
     return (
-        score_to_start(x, grid[y])
-        * score_to_end(x, grid[y])
-        * score_to_start(y, col)
-        * score_to_end(y, col)
+        apply_til_start(viewing_distance, x, row)
+        * apply_til_end(viewing_distance, x, row)
+        * apply_til_start(viewing_distance, y, col)
+        * apply_til_end(viewing_distance, y, col)
     )
 
 
 def scenic_scores(grid):
-    scores = []
-    for y in range(len(grid)):
-        for x in range(len(grid[0])):
-            scores.append(scenic_score(x, y, grid))
-    return scores
+    for x, y, row, col in trees_in_plantation(grid):
+        yield scenic_score(x, y, row, col)
 
 
 def part2(file):
