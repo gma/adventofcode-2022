@@ -33,3 +33,32 @@ class TestVisibility:
 
 def test_part1_solution():
     assert trees.part1(io.StringIO(test_data)) == 21
+
+
+class TestScenicScore:
+    def test_score_to_start_stops_at_edge_or_tree_at_least_as_tall(self):
+        row = [2, 1, 2, 3, 3]
+
+        assert trees.score_to_start(0, row) == 0
+        assert trees.score_to_start(1, row) == 1
+        assert trees.score_to_start(2, row) == 2
+        assert trees.score_to_start(3, row) == 3
+        assert trees.score_to_start(4, row) == 1
+
+    def test_score_to_start_counts_trees_visible_to_end_of_sequence(self):
+        row = [3, 3, 2, 1, 2]
+
+        assert trees.score_to_end(0, row) == 1
+        assert trees.score_to_end(1, row) == 3
+        assert trees.score_to_end(2, row) == 2
+        assert trees.score_to_end(3, row) == 1
+        assert trees.score_to_end(4, row) == 0
+
+    def test_scenic_score_calculated_correctly(self):
+        grid = trees.load_grid(io.StringIO(test_data))
+
+        assert trees.scenic_score(2, 3, grid) == 8
+
+
+def test_part2_solution():
+    assert trees.part2(io.StringIO(test_data)) == 8
