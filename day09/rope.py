@@ -1,12 +1,13 @@
 class Knot:
-    def __init__(self, x=0, y=0):
+    def __init__(self, label, x=0, y=0):
+        self.label = label
         self.x = x
         self.y = y
         self.track = []
         self.observers = []
 
     def __repr__(self):
-        return "%s(%s, %s)" % (self.__class__.__name__, self.x, self.y)
+        return f"self.__class__.__name__({self.label}, {self.x}, {self.y})"
 
     def go(self, direction):
         transforms = {"U": (0, 1), "D": (0, -1), "L": (-1, 0), "R": (1, 0)}
@@ -46,8 +47,8 @@ class Knot:
 
 
 def part1(file):
-    head = Knot()
-    tail = Knot()
+    head = Knot("H")
+    tail = Knot("T")
     tail.follow(head)
 
     for line in file:
