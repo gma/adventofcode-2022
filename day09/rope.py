@@ -1,4 +1,4 @@
-class End:
+class Knot:
     def __init__(self, x=0, y=0):
         self.x = x
         self.y = y
@@ -18,8 +18,8 @@ class End:
         for observer in self.observers:
             observer.keep_in_contact(self)
 
-    def follow(self, end):
-        end.observers.append(self)
+    def follow(self, knot):
+        knot.observers.append(self)
 
     def transform_vertically(self, delta):
         self.transform_position((0, delta // abs(delta)))
@@ -27,9 +27,9 @@ class End:
     def transform_horizontally(self, delta):
         self.transform_position((delta // abs(delta), 0))
 
-    def keep_in_contact(self, other_end):
-        vertical_delta = other_end.y - self.y
-        horizontal_delta = other_end.x - self.x
+    def keep_in_contact(self, followed_knot):
+        vertical_delta = followed_knot.y - self.y
+        horizontal_delta = followed_knot.x - self.x
 
         if abs(vertical_delta) > 1 and abs(horizontal_delta) == 1:
             self.transform_vertically(vertical_delta)
@@ -46,8 +46,8 @@ class End:
 
 
 def part1(file):
-    head = End()
-    tail = End()
+    head = Knot()
+    tail = Knot()
     tail.follow(head)
 
     for line in file:

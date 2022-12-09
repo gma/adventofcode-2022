@@ -3,19 +3,19 @@ import io
 import rope
 
 
-class TestRopeEnd:
+class TestKnot:
     def test_can_be_moved_in_each_direction(self):
-        end = rope.End(0, 0)
+        knot = rope.Knot(0, 0)
 
-        end.go("L")
-        assert end.x == -1 and end.y == 0
+        knot.go("L")
+        assert knot.x == -1 and knot.y == 0
 
-        end.go("U")
-        assert end.x == -1 and end.y == 1
+        knot.go("U")
+        assert knot.x == -1 and knot.y == 1
 
-    def test_follower_doesnt_move_while_end_is_one_step_away(self):
-        head = rope.End(0, 0)
-        tail = rope.End(0, 0)
+    def test_follower_doesnt_move_while_knot_is_one_step_away(self):
+        head = rope.Knot(0, 0)
+        tail = rope.Knot(0, 0)
         tail.follow(head)
 
         # head makes a circle around tail
@@ -31,9 +31,9 @@ class TestRopeEnd:
 
         assert len(set(tail.track)) == 1
 
-    def test_follower_moves_up_when_end_moves_more_than_one_step_away(self):
-        head = rope.End(0, 0)
-        tail = rope.End(0, 0)
+    def test_follower_moves_up_when_knot_moves_more_than_one_step_away(self):
+        head = rope.Knot(0, 0)
+        tail = rope.Knot(0, 0)
         tail.follow(head)
 
         head.go("U")
@@ -41,9 +41,9 @@ class TestRopeEnd:
 
         assert tail.x == 0 and tail.y == 1
 
-    def test_follower_moves_right_when_end_moves_more_than_one_step_away(self):
-        head = rope.End(0, 0)
-        tail = rope.End(0, 0)
+    def test_follower_moves_right_when_knot_moves_more_than_one_step_away(self):
+        head = rope.Knot(0, 0)
+        tail = rope.Knot(0, 0)
         tail.follow(head)
 
         head.go("R")
@@ -51,18 +51,18 @@ class TestRopeEnd:
 
         assert tail.x == 1 and tail.y == 0
 
-    def test_follower_as_diagonally_adjacent_end_moves_away_vertically(self):
-        head = rope.End(1, 1)
-        tail = rope.End(0, 0)
+    def test_follower_as_diagonally_adjacent_knot_moves_away_vertically(self):
+        head = rope.Knot(1, 1)
+        tail = rope.Knot(0, 0)
         tail.follow(head)
 
         head.go("U")
 
         assert tail.x == 1 and tail.y == 1
 
-    def test_follower_as_diagonally_adjacent_end_moves_away_horizontally(self):
-        head = rope.End(1, 1)
-        tail = rope.End(0, 0)
+    def test_follower_as_diagonally_adjacent_knot_moves_away_horizontally(self):
+        head = rope.Knot(1, 1)
+        tail = rope.Knot(0, 0)
         tail.follow(head)
 
         head.go("R")
@@ -70,8 +70,8 @@ class TestRopeEnd:
         assert tail.x == 1 and tail.y == 1
 
     def test_follower_tracks_its_route(self):
-        head = rope.End(0, 0)
-        tail = rope.End(0, 0)
+        head = rope.Knot(0, 0)
+        tail = rope.Knot(0, 0)
         tail.follow(head)
 
         head.go("R")
