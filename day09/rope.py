@@ -9,6 +9,10 @@ class Knot:
     def __repr__(self):
         return f"self.__class__.__name__({self.label}, {self.x}, {self.y})"
 
+    @property
+    def coords(self):
+        return (self.x, self.y)
+
     def go(self, direction):
         transforms = {"U": (0, 1), "D": (0, -1), "L": (-1, 0), "R": (1, 0)}
         self.transform(transforms[direction])

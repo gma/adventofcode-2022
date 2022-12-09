@@ -8,10 +8,10 @@ class TestKnot:
         knot = rope.Knot("H", 0, 0)
 
         knot.go("L")
-        assert knot.x == -1 and knot.y == 0
+        assert knot.coords == (-1, 0)
 
         knot.go("U")
-        assert knot.x == -1 and knot.y == 1
+        assert knot.coords == (-1, 1)
 
     def test_follower_doesnt_move_while_knot_is_one_step_away(self):
         head = rope.Knot("H", 0, 0)
@@ -39,7 +39,7 @@ class TestKnot:
         head.go("U")
         head.go("U")
 
-        assert tail.x == 0 and tail.y == 1
+        assert tail.coords == (0, 1)
 
     def test_follower_moves_right_when_knot_moves_more_than_one_step_away(self):
         head = rope.Knot("H", 0, 0)
@@ -49,7 +49,7 @@ class TestKnot:
         head.go("R")
         head.go("R")
 
-        assert tail.x == 1 and tail.y == 0
+        assert tail.coords == (1, 0)
 
     def test_follower_as_diagonally_adjacent_knot_moves_away_vertically(self):
         head = rope.Knot("H", 1, 1)
@@ -58,7 +58,7 @@ class TestKnot:
 
         head.go("U")
 
-        assert tail.x == 1 and tail.y == 1
+        assert tail.coords == (1, 1)
 
     def test_follower_as_diagonally_adjacent_knot_moves_away_horizontally(self):
         head = rope.Knot("H", 1, 1)
@@ -67,7 +67,7 @@ class TestKnot:
 
         head.go("R")
 
-        assert tail.x == 1 and tail.y == 1
+        assert tail.coords == (1, 1)
 
     def test_follower_as_directly_adjacent_knot_moves_away_diagonally(self):
         head = rope.Knot("H", -2, 2)
@@ -78,7 +78,7 @@ class TestKnot:
 
         head.go("L")
 
-        assert tail.x == -1 and tail.y == 1
+        assert tail.coords == (-1, 1)
 
     def test_follower_tracks_its_route(self):
         head = rope.Knot("H", 0, 0)
