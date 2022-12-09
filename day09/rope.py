@@ -44,18 +44,41 @@ class Knot:
 
         self.track.append((self.x, self.y))
 
+
+def moves(file):
+    for line in file:
+        direction, steps = line.split()
+        for _ in range(0, int(steps)):
+            yield direction
+
+
 def part1(file):
     head = Knot("H")
     tail = Knot("T")
     tail.follow(head)
 
-    for line in file:
-        direction, steps = line.split()
-        for _ in range(0, int(steps)):
-            head.go(direction)
+    for direction in moves(file):
+        head.go(direction)
+
+    return len(set(tail.track))
+
+
+def part2(file):
+    knots = [Knot("H")]
+    for i in range(1, 10):
+        knot = Knot(i)
+        knot.follow(knots[-1])
+        knots.append(knot)
+    head, tail = knots[0], knots[-1]
+
+    for direction in moves(file):
+        head.go(direction)
 
     return len(set(tail.track))
 
 
 if __name__ == "__main__":
-    print(part1(open("input")))
+    with open("input") as f:
+        lines = f.readlines()
+    print(part1(lines))
+    print(part2(lines))

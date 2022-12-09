@@ -104,3 +104,18 @@ R 2
 """
 
     assert rope.part1(io.StringIO(test_data)) == 13
+
+
+def test_part2_solution():
+    test_data = """\
+R 5
+U 8
+L 8
+D 3
+R 17
+D 10
+L 25
+U 20
+"""
+
+    assert rope.part2(io.StringIO(test_data)) == 36
