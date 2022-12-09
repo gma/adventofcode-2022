@@ -35,8 +35,8 @@ class Knot:
 
         step_h = 0
         step_v = 0
-        if (abs(delta_v) > 1 and abs(delta_h) == 1) or (
-            abs(delta_h) > 1 and abs(delta_v) == 1
+        if (abs(delta_v) > 1 and abs(delta_h) >= 1) or (
+            abs(delta_h) > 1 and abs(delta_v) >= 1
         ):
             step_h = self.step_towards(delta_h)
             step_v = self.step_towards(delta_v)

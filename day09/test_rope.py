@@ -80,6 +80,17 @@ class TestKnot:
 
         assert tail.coords == (-1, 1)
 
+    def test_follower_as_diagonally_adjacent_knot_moves_away_diagonally(self):
+        head = rope.Knot("H", 2, 2)
+        one = rope.Knot("1", 1, 1)
+        one.follow(head)
+        tail = rope.Knot("T", 0, 0)
+        tail.follow(one)
+
+        head.go("U")  # moves knot one away diagonally
+
+        assert tail.coords == (1, 1)
+
     def test_follower_tracks_its_route(self):
         head = rope.Knot("H", 0, 0)
         tail = rope.Knot("T", 0, 0)
