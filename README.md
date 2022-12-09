@@ -30,6 +30,7 @@ To run one of the solutions, change to the relevant directory and then run the c
 - [Day 6: Tuning Trouble](./day06)
 - [Day 7: No Space Lef On Device](./day07)
 - [Day 8: Treetop Tree House](./day08)
+- [Day 9: Rope Bridge](./day09)
 
 [2022's Advent of Code]: https://adventofcode.com/2022
 [TDD]: https://www.agilealliance.org/glossary/tdd/
