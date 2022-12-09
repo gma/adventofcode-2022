@@ -26,7 +26,7 @@ class Knot:
     def follow(self, knot):
         knot.observers.append(self)
 
-    def step_towards(self, delta):
+    def step_in_direction_of(self, delta):
         return delta // abs(delta)
 
     def keep_in_contact(self, followed_knot):
@@ -35,15 +35,14 @@ class Knot:
 
         step_h = 0
         step_v = 0
-        if (abs(delta_v) > 1 and abs(delta_h) >= 1) or (
-            abs(delta_h) > 1 and abs(delta_v) >= 1
-        ):
-            step_h = self.step_towards(delta_h)
-            step_v = self.step_towards(delta_v)
-        elif abs(delta_v) > 1:
-            step_v = self.step_towards(delta_v)
-        elif abs(delta_h) > 1:
-            step_h = self.step_towards(delta_h)
+        if abs(delta_h) > 1:
+            step_h = self.step_in_direction_of(delta_h)
+            if abs(delta_v) == 1:
+                step_v = self.step_in_direction_of(delta_v)
+        if abs(delta_v) > 1:
+            step_v = self.step_in_direction_of(delta_v)
+            if abs(delta_h) == 1:
+                step_h = self.step_in_direction_of(delta_h)
         self.transform((step_h, step_v))
 
         self.track.append((self.x, self.y))
