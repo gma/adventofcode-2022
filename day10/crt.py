@@ -1,3 +1,6 @@
+import sys
+
+
 class CPU:
     def __init__(self):
         self.register = 1
@@ -37,5 +40,18 @@ def part1(instructions):
     return total
 
 
+def part2(instructions):
+    cpu = CPU()
+    columns = 40
+    for pixel, register in enumerate(cpu.execute(instructions)):
+        sprite = range(register - 1, register + 2)
+        sys.stdout.write("#" if pixel % columns in sprite else ".")
+        if (pixel + 1) % columns == 0:
+            sys.stdout.write("\n")
+
+
 if __name__ == "__main__":
-    print(part1(open("input")))
+    with open("input") as file:
+        instructions = file.readlines()
+    print(part1(instructions))
+    part2(open("input"))
